@@ -12,9 +12,7 @@ func TestSomeCase(t *testing.T) {
 
 	commonCalcObj := &CalculatePriceParam{
 		CoinTotal: 1000,
-		// pointTotal int
-		// vipLevel   int    //ex:0(not VIP), 1, 2, 3
-		UserId: "u1", //used to check vip level and execute SQL update
+		UserId:    "u1",
 	}
 
 	vipDiscount1 := make(map[int]int)
@@ -28,9 +26,8 @@ func TestSomeCase(t *testing.T) {
 
 	vipCoin1CalcObj := &CalculatePriceParam{
 		CoinTotal: 1000,
-		// pointTotal int
-		VipLevel: 2,
-		UserId:   "u2",
+		VipLevel:  2,
+		UserId:    "u2",
 	}
 
 	vipDiscount2 := make(map[int]int)
@@ -44,23 +41,20 @@ func TestSomeCase(t *testing.T) {
 
 	vipCoin2CalcObj := &CalculatePriceParam{
 		CoinTotal: 1000,
-		// pointTotal int
-		VipLevel: 1,
-		UserId:   "u3",
+		VipLevel:  1,
+		UserId:    "u3",
 	}
 
 	vipCoin1CalcObj_2 := &CalculatePriceParam{
 		CoinTotal: 1000,
-		// pointTotal int
-		VipLevel: 1,
-		UserId:   "u4",
+		VipLevel:  1,
+		UserId:    "u4",
 	}
 
 	vipCoin2CalcObj_2 := &CalculatePriceParam{
 		CoinTotal: 1000,
-		// pointTotal int
-		VipLevel: 3,
-		UserId:   "u5",
+		VipLevel:  3,
+		UserId:    "u5",
 	}
 
 	pointUse1Obj := &EventPatternCreatObj{
@@ -71,8 +65,7 @@ func TestSomeCase(t *testing.T) {
 	pointUse1CalcObj := &CalculatePriceParam{
 		CoinTotal:  1000,
 		PointTotal: 100,
-		// vipLevel: 2,
-		UserId: "u6",
+		UserId:     "u6",
 	}
 
 	pointUse2Obj := &EventPatternCreatObj{
@@ -83,22 +76,19 @@ func TestSomeCase(t *testing.T) {
 	pointUse2CalcObj := &CalculatePriceParam{
 		CoinTotal:  1000,
 		PointTotal: 100,
-		// vipLevel: 2,
-		UserId: "u7",
+		UserId:     "u7",
 	}
 
 	pointUse1CalcObj_2 := &CalculatePriceParam{
 		CoinTotal:  1000,
 		PointTotal: 200,
-		// vipLevel: 2,
-		UserId: "u8",
+		UserId:     "u8",
 	}
 
 	pointUse2CalcObj_2 := &CalculatePriceParam{
 		CoinTotal:  1000,
 		PointTotal: 200,
-		// vipLevel: 2,
-		UserId: "u9",
+		UserId:     "u9",
 	}
 
 	consume(commonObj, commonCalcObj)
@@ -111,7 +101,6 @@ func TestSomeCase(t *testing.T) {
 	consume(pointUse2Obj, pointUse2CalcObj)
 	consume(pointUse1Obj, pointUse1CalcObj_2)
 	consume(pointUse2Obj, pointUse2CalcObj_2)
-
 }
 
 func TestAddedPattern(t *testing.T) {
@@ -132,41 +121,10 @@ func TestAddedPattern(t *testing.T) {
 	pointUse1CalcObj := &CalculatePriceParam{
 		CoinTotal:  1000,
 		PointTotal: 200,
-		// vipLevel: 2,
-		UserId: "uu1",
+		UserId:     "uu1",
 	}
 
-	// pointUse2Obj := &EventPatternCreatObj{
-	// 	factoryType:     "PointUsePattern",
-	// 	pointPercentage: "1:2",
-	// }
-
-	// pointUse2CalcObj := &CalculatePriceParam{
-	// 	coinTotal:  1000,
-	// 	pointTotal: 100,
-	// 	// vipLevel: 2,
-	// 	userId: "u7",
-	// }
-
-	// pointUse1CalcObj_2 := &CalculatePriceParam{
-	// 	coinTotal:  1000,
-	// 	pointTotal: 200,
-	// 	// vipLevel: 2,
-	// 	userId: "u8",
-	// }
-
-	// pointUse2CalcObj_2 := &CalculatePriceParam{
-	// 	coinTotal:  1000,
-	// 	pointTotal: 200,
-	// 	// vipLevel: 2,
-	// 	userId: "u9",
-	// }
-
 	consume(pointUse1Obj, pointUse1CalcObj)
-	// consume(pointUse2Obj, pointUse2CalcObj)
-	// consume(pointUse1Obj, pointUse1CalcObj_2)
-	// consume(pointUse2Obj, pointUse2CalcObj_2)
-
 }
 
 func TestChangeSetting(t *testing.T) {
@@ -182,9 +140,8 @@ func TestChangeSetting(t *testing.T) {
 
 	vipCoin1CalcObj := &CalculatePriceParam{
 		CoinTotal: 1000,
-		// pointTotal int
-		VipLevel: 2,
-		UserId:   "u2",
+		VipLevel:  2,
+		UserId:    "u2",
 	}
 
 	priceContext := EventPatternContext(*vipCoin1Obj)
@@ -210,8 +167,7 @@ func TestChangeSettingPointUse(t *testing.T) {
 	pointUse1CalcObj := &CalculatePriceParam{
 		CoinTotal:  1000,
 		PointTotal: 100,
-		// vipLevel: 2,
-		UserId: "u6",
+		UserId:     "u6",
 	}
 
 	priceContext := EventPatternContext(*pointUse1Obj)
@@ -220,7 +176,6 @@ func TestChangeSettingPointUse(t *testing.T) {
 	pointUse1Obj.PointPercentage = "1:2"
 	priceContext.ChangeSetting(*pointUse1Obj)
 	priceContext.CalculatePrice(pointUse1CalcObj)
-
 }
 
 func TestChangeSettingReachPointDiscount(t *testing.T) {
@@ -240,8 +195,7 @@ func TestChangeSettingReachPointDiscount(t *testing.T) {
 	pointUse1CalcObj := &CalculatePriceParam{
 		CoinTotal:  1000,
 		PointTotal: 200,
-		// vipLevel: 2,
-		UserId: "uu1",
+		UserId:     "uu1",
 	}
 
 	priceContext := EventPatternContext(*pointUse1Obj)
@@ -258,7 +212,6 @@ func TestChangeSettingReachPointDiscount(t *testing.T) {
 	pointUse1Obj.PointPercentage = "1:2"
 	priceContext.ChangeSetting(*pointUse1Obj)
 	priceContext.CalculatePrice(pointUse1CalcObj)
-
 }
 
 func consume(param *EventPatternCreatObj, calcParam *CalculatePriceParam) {

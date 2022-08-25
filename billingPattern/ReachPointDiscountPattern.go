@@ -64,7 +64,7 @@ func (f *ReachPointDiscountPatternFactory) Create(parameters EventPatternCreatOb
 	pointReachDiscount := reachPointDiscountMap["pointReachDiscount"]
 
 	pattern := &ReachPointDiscountPattern{
-		pointPercentage:    pointPercentage, //ex: 1:1 point:coin
+		pointPercentage:    pointPercentage,
 		pointPartRatio:     point,
 		coinPartRatio:      coin,
 		pointThreashold:    pointThreashold,

@@ -1,39 +1,18 @@
 package billingPattern
 
 import (
-	// "fmt"
 	"fmt"
 	"log"
 )
 
 var EventPriceFactoryMap = make(map[string]EventPriceFactory)
 
-// type PatternTypeEnum int
-// const (
-//     commonPattern PatternTypeEnum = iota
-//     vipCoinPattern
-//     pointUsePattern
-// 	reachPointDiscountPattern
-// )
-
-// public static UserPayService getByUserType(String type){
-// 	return services.get(type);
-// }
-
-// public static void register(String userType,UserPayService userPayService){
-// 	Assert.notNull(userType,"userType can't be null");
-// 	services.put(userType,userPayService);
-// }
-
 type EventPriceFactory interface {
 	Create(parameters EventPatternCreatObj) (EventPriceType, error)
-	// Register(name string, factory EventPriceFactory)
 }
 
 func Register(name string, factory EventPriceFactory) {
-
 	EventPriceFactoryMap[name] = factory
-
 }
 
 func EventPatternContext(param EventPatternCreatObj) EventPriceType {
@@ -44,15 +23,8 @@ func EventPatternContext(param EventPatternCreatObj) EventPriceType {
 	return eventPriceType
 }
 
-// func Create(name string, parameters map[string]interface{}) (storagedriver.StorageDriver, error) {
-
-// 	return driverFactory.Create(parameters)
-
-// }
-
 type EventPatternCreatObj struct {
-	FactoryType string
-	// eventPriceType  EventPriceType
+	FactoryType     string
 	VipDiscount     map[int]int //ex: VIP1: 95折 [1]95
 	PointPercentage string      //ex: 1:1
 	Others          map[string]interface{}

@@ -27,7 +27,5 @@ func (f *CommonPatternFactory) Create(parameters EventPatternCreatObj) (EventPri
 }
 
 func init() {
-
 	Register("CommonPattern", &CommonPatternFactory{})
-	// factory.Register(driverName, &filesystemDriverFactory{})
 }

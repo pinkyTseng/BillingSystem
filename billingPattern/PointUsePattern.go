@@ -13,7 +13,6 @@ type PointUsePattern struct {
 }
 
 type PointUsePatternFactory struct {
-	// thePattern VipCoinPattern
 }
 
 func (p *PointUsePattern) ChangeSetting(param EventPatternCreatObj) {
@@ -23,7 +22,7 @@ func (p *PointUsePattern) ChangeSetting(param EventPatternCreatObj) {
 		point, _ := strconv.Atoi(ratioArr[0])
 		coin, _ := strconv.Atoi(ratioArr[1])
 
-		p.pointPercentage = pointPercentage //ex: 1:1 point:coin
+		p.pointPercentage = pointPercentage
 		p.pointPartRatio = point
 		p.coinPartRatio = coin
 	}
@@ -44,7 +43,7 @@ func (f *PointUsePatternFactory) Create(parameters EventPatternCreatObj) (EventP
 	point, _ := strconv.Atoi(ratioArr[0])
 	coin, _ := strconv.Atoi(ratioArr[1])
 	pattern := &PointUsePattern{
-		pointPercentage: pointPercentage, //ex: 1:1 point:coin
+		pointPercentage: pointPercentage,
 		pointPartRatio:  point,
 		coinPartRatio:   coin,
 	}
