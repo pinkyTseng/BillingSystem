@@ -18,8 +18,8 @@ type ReachPointDiscountPatternFactory struct {
 }
 
 func (p *ReachPointDiscountPattern) ChangeSetting(param EventPatternCreatObj) {
-	if param.pointPercentage != "" {
-		pointPercentage := param.pointPercentage
+	if param.PointPercentage != "" {
+		pointPercentage := param.PointPercentage
 		ratioArr := strings.Split(pointPercentage, ":")
 		point, _ := strconv.Atoi(ratioArr[0])
 		coin, _ := strconv.Atoi(ratioArr[1])
@@ -29,8 +29,8 @@ func (p *ReachPointDiscountPattern) ChangeSetting(param EventPatternCreatObj) {
 		p.coinPartRatio = coin
 	}
 
-	if param.others != nil && param.others["reachPointDiscount"] != nil {
-		reachPointDiscountMap := param.others["reachPointDiscount"].(map[string]int)
+	if param.Others != nil && param.Others["reachPointDiscount"] != nil {
+		reachPointDiscountMap := param.Others["reachPointDiscount"].(map[string]int)
 		if reachPointDiscountMap["pointThreashold"] != 0 {
 			p.pointThreashold = reachPointDiscountMap["pointThreashold"]
 		}
@@ -41,9 +41,9 @@ func (p *ReachPointDiscountPattern) ChangeSetting(param EventPatternCreatObj) {
 }
 
 func (p *ReachPointDiscountPattern) CalculatePrice(param *CalculatePriceParam) {
-	coinTotal := param.coinTotal
-	userId := param.userId
-	pointTotal := param.pointTotal
+	coinTotal := param.CoinTotal
+	userId := param.UserId
+	pointTotal := param.PointTotal
 
 	coinCost := coinTotal - pointTotal*p.coinPartRatio/p.pointPartRatio
 	//in real case, need to pass and check the userId to judge whether the user is a VIP
@@ -54,12 +54,12 @@ func (p *ReachPointDiscountPattern) CalculatePrice(param *CalculatePriceParam) {
 }
 
 func (f *ReachPointDiscountPatternFactory) Create(parameters EventPatternCreatObj) (EventPriceType, error) {
-	pointPercentage := parameters.pointPercentage
+	pointPercentage := parameters.PointPercentage
 	ratioArr := strings.Split(pointPercentage, ":")
 	point, _ := strconv.Atoi(ratioArr[0])
 	coin, _ := strconv.Atoi(ratioArr[1])
 
-	reachPointDiscountMap := parameters.others["reachPointDiscount"].(map[string]int)
+	reachPointDiscountMap := parameters.Others["reachPointDiscount"].(map[string]int)
 	pointThreashold := reachPointDiscountMap["pointThreashold"]
 	pointReachDiscount := reachPointDiscountMap["pointReachDiscount"]
 

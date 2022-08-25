@@ -11,10 +11,10 @@ type VipCoinPatternFactory struct {
 }
 
 func (p *VipCoinPattern) ChangeSetting(param EventPatternCreatObj) {
-	if param.vipDiscount != nil {
+	if param.VipDiscount != nil {
 		vipDiscountMap := make(map[int]int)
 		// vipDiscountMap[0] = 100
-		for k, v := range param.vipDiscount {
+		for k, v := range param.VipDiscount {
 			vipDiscountMap[k] = v
 		}
 		vipDiscountMap[0] = 100
@@ -23,9 +23,9 @@ func (p *VipCoinPattern) ChangeSetting(param EventPatternCreatObj) {
 }
 
 func (p *VipCoinPattern) CalculatePrice(param *CalculatePriceParam) {
-	coinTotal := param.coinTotal
-	userId := param.userId
-	vipLevel := param.vipLevel
+	coinTotal := param.CoinTotal
+	userId := param.UserId
+	vipLevel := param.VipLevel
 
 	//check whether the vipLevel of the userId is correct
 
@@ -37,7 +37,7 @@ func (p *VipCoinPattern) CalculatePrice(param *CalculatePriceParam) {
 func (f *VipCoinPatternFactory) Create(parameters EventPatternCreatObj) (EventPriceType, error) {
 	vipDiscountMap := make(map[int]int)
 	// vipDiscountMap[0] = 100
-	for k, v := range parameters.vipDiscount {
+	for k, v := range parameters.VipDiscount {
 		vipDiscountMap[k] = v
 	}
 	vipDiscountMap[0] = 100

@@ -7,14 +7,14 @@ import (
 func TestSomeCase(t *testing.T) {
 
 	commonObj := &EventPatternCreatObj{
-		factoryType: "CommonPattern",
+		FactoryType: "CommonPattern",
 	}
 
 	commonCalcObj := &CalculatePriceParam{
-		coinTotal: 1000,
+		CoinTotal: 1000,
 		// pointTotal int
 		// vipLevel   int    //ex:0(not VIP), 1, 2, 3
-		userId: "u1", //used to check vip level and execute SQL update
+		UserId: "u1", //used to check vip level and execute SQL update
 	}
 
 	vipDiscount1 := make(map[int]int)
@@ -22,15 +22,15 @@ func TestSomeCase(t *testing.T) {
 	vipDiscount1[2] = 90
 	vipDiscount1[3] = 85
 	vipCoin1Obj := &EventPatternCreatObj{
-		factoryType: "VipCoinPattern",
-		vipDiscount: vipDiscount1,
+		FactoryType: "VipCoinPattern",
+		VipDiscount: vipDiscount1,
 	}
 
 	vipCoin1CalcObj := &CalculatePriceParam{
-		coinTotal: 1000,
+		CoinTotal: 1000,
 		// pointTotal int
-		vipLevel: 2,
-		userId:   "u2",
+		VipLevel: 2,
+		UserId:   "u2",
 	}
 
 	vipDiscount2 := make(map[int]int)
@@ -38,67 +38,67 @@ func TestSomeCase(t *testing.T) {
 	vipDiscount2[2] = 75
 	vipDiscount2[3] = 70
 	vipCoin2Obj := &EventPatternCreatObj{
-		factoryType: "VipCoinPattern",
-		vipDiscount: vipDiscount2,
+		FactoryType: "VipCoinPattern",
+		VipDiscount: vipDiscount2,
 	}
 
 	vipCoin2CalcObj := &CalculatePriceParam{
-		coinTotal: 1000,
+		CoinTotal: 1000,
 		// pointTotal int
-		vipLevel: 1,
-		userId:   "u3",
+		VipLevel: 1,
+		UserId:   "u3",
 	}
 
 	vipCoin1CalcObj_2 := &CalculatePriceParam{
-		coinTotal: 1000,
+		CoinTotal: 1000,
 		// pointTotal int
-		vipLevel: 1,
-		userId:   "u4",
+		VipLevel: 1,
+		UserId:   "u4",
 	}
 
 	vipCoin2CalcObj_2 := &CalculatePriceParam{
-		coinTotal: 1000,
+		CoinTotal: 1000,
 		// pointTotal int
-		vipLevel: 3,
-		userId:   "u5",
+		VipLevel: 3,
+		UserId:   "u5",
 	}
 
 	pointUse1Obj := &EventPatternCreatObj{
-		factoryType:     "PointUsePattern",
-		pointPercentage: "1:1",
+		FactoryType:     "PointUsePattern",
+		PointPercentage: "1:1",
 	}
 
 	pointUse1CalcObj := &CalculatePriceParam{
-		coinTotal:  1000,
-		pointTotal: 100,
+		CoinTotal:  1000,
+		PointTotal: 100,
 		// vipLevel: 2,
-		userId: "u6",
+		UserId: "u6",
 	}
 
 	pointUse2Obj := &EventPatternCreatObj{
-		factoryType:     "PointUsePattern",
-		pointPercentage: "1:2",
+		FactoryType:     "PointUsePattern",
+		PointPercentage: "1:2",
 	}
 
 	pointUse2CalcObj := &CalculatePriceParam{
-		coinTotal:  1000,
-		pointTotal: 100,
+		CoinTotal:  1000,
+		PointTotal: 100,
 		// vipLevel: 2,
-		userId: "u7",
+		UserId: "u7",
 	}
 
 	pointUse1CalcObj_2 := &CalculatePriceParam{
-		coinTotal:  1000,
-		pointTotal: 200,
+		CoinTotal:  1000,
+		PointTotal: 200,
 		// vipLevel: 2,
-		userId: "u8",
+		UserId: "u8",
 	}
 
 	pointUse2CalcObj_2 := &CalculatePriceParam{
-		coinTotal:  1000,
-		pointTotal: 200,
+		CoinTotal:  1000,
+		PointTotal: 200,
 		// vipLevel: 2,
-		userId: "u9",
+		UserId: "u9",
 	}
 
 	consume(commonObj, commonCalcObj)
@@ -124,16 +124,16 @@ func TestAddedPattern(t *testing.T) {
 	others["reachPointDiscount"] = reachPointDiscount
 
 	pointUse1Obj := &EventPatternCreatObj{
-		factoryType:     "ReachPointDiscountPattern",
-		pointPercentage: "1:1",
-		others:          others,
+		FactoryType:     "ReachPointDiscountPattern",
+		PointPercentage: "1:1",
+		Others:          others,
 	}
 
 	pointUse1CalcObj := &CalculatePriceParam{
-		coinTotal:  1000,
-		pointTotal: 200,
+		CoinTotal:  1000,
+		PointTotal: 200,
 		// vipLevel: 2,
-		userId: "uu1",
+		UserId: "uu1",
 	}
 
 	// pointUse2Obj := &EventPatternCreatObj{
@@ -176,15 +176,15 @@ func TestChangeSetting(t *testing.T) {
 	vipDiscount1[2] = 90
 	vipDiscount1[3] = 85
 	vipCoin1Obj := &EventPatternCreatObj{
-		factoryType: "VipCoinPattern",
-		vipDiscount: vipDiscount1,
+		FactoryType: "VipCoinPattern",
+		VipDiscount: vipDiscount1,
 	}
 
 	vipCoin1CalcObj := &CalculatePriceParam{
-		coinTotal: 1000,
+		CoinTotal: 1000,
 		// pointTotal int
-		vipLevel: 2,
-		userId:   "u2",
+		VipLevel: 2,
+		UserId:   "u2",
 	}
 
 	priceContext := EventPatternContext(*vipCoin1Obj)
@@ -194,7 +194,7 @@ func TestChangeSetting(t *testing.T) {
 	vipDiscount2[1] = 80
 	vipDiscount2[2] = 75
 	vipDiscount2[3] = 70
-	vipCoin1Obj.vipDiscount = vipDiscount2
+	vipCoin1Obj.VipDiscount = vipDiscount2
 
 	priceContext.ChangeSetting(*vipCoin1Obj)
 	priceContext.CalculatePrice(vipCoin1CalcObj)
@@ -203,21 +203,21 @@ func TestChangeSetting(t *testing.T) {
 
 func TestChangeSettingPointUse(t *testing.T) {
 	pointUse1Obj := &EventPatternCreatObj{
-		factoryType:     "PointUsePattern",
-		pointPercentage: "1:1",
+		FactoryType:     "PointUsePattern",
+		PointPercentage: "1:1",
 	}
 
 	pointUse1CalcObj := &CalculatePriceParam{
-		coinTotal:  1000,
-		pointTotal: 100,
+		CoinTotal:  1000,
+		PointTotal: 100,
 		// vipLevel: 2,
-		userId: "u6",
+		UserId: "u6",
 	}
 
 	priceContext := EventPatternContext(*pointUse1Obj)
 	priceContext.CalculatePrice(pointUse1CalcObj)
 
-	pointUse1Obj.pointPercentage = "1:2"
+	pointUse1Obj.PointPercentage = "1:2"
 	priceContext.ChangeSetting(*pointUse1Obj)
 	priceContext.CalculatePrice(pointUse1CalcObj)
 
@@ -232,16 +232,16 @@ func TestChangeSettingReachPointDiscount(t *testing.T) {
 	others["reachPointDiscount"] = reachPointDiscount
 
 	pointUse1Obj := &EventPatternCreatObj{
-		factoryType:     "ReachPointDiscountPattern",
-		pointPercentage: "1:1",
-		others:          others,
+		FactoryType:     "ReachPointDiscountPattern",
+		PointPercentage: "1:1",
+		Others:          others,
 	}
 
 	pointUse1CalcObj := &CalculatePriceParam{
-		coinTotal:  1000,
-		pointTotal: 200,
+		CoinTotal:  1000,
+		PointTotal: 200,
 		// vipLevel: 2,
-		userId: "uu1",
+		UserId: "uu1",
 	}
 
 	priceContext := EventPatternContext(*pointUse1Obj)
@@ -253,9 +253,9 @@ func TestChangeSettingReachPointDiscount(t *testing.T) {
 
 	others2 := make(map[string]interface{})
 	others2["reachPointDiscount"] = reachPointDiscount2
-	pointUse1Obj.others = others2
+	pointUse1Obj.Others = others2
 
-	pointUse1Obj.pointPercentage = "1:2"
+	pointUse1Obj.PointPercentage = "1:2"
 	priceContext.ChangeSetting(*pointUse1Obj)
 	priceContext.CalculatePrice(pointUse1CalcObj)
 

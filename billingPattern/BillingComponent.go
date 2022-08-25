@@ -37,7 +37,7 @@ func Register(name string, factory EventPriceFactory) {
 }
 
 func EventPatternContext(param EventPatternCreatObj) EventPriceType {
-	eventPriceType, err := EventPriceFactoryMap[param.factoryType].Create(param)
+	eventPriceType, err := EventPriceFactoryMap[param.FactoryType].Create(param)
 	if err != nil {
 		fmt.Printf("some unexpected error happen")
 	}
@@ -51,17 +51,17 @@ func EventPatternContext(param EventPatternCreatObj) EventPriceType {
 // }
 
 type EventPatternCreatObj struct {
-	factoryType string
+	FactoryType string
 	// eventPriceType  EventPriceType
-	vipDiscount     map[int]int //ex: VIP1: 95折 [1]95
-	pointPercentage string      //ex: 1:1
-	others          map[string]interface{}
+	VipDiscount     map[int]int //ex: VIP1: 95折 [1]95
+	PointPercentage string      //ex: 1:1
+	Others          map[string]interface{}
 }
 type CalculatePriceParam struct {
-	coinTotal  int
-	pointTotal int
-	vipLevel   int    //ex:0(not VIP), 1, 2, 3
-	userId     string //used to check vip level and execute SQL update
+	CoinTotal  int
+	PointTotal int
+	VipLevel   int    //ex:0(not VIP), 1, 2, 3
+	UserId     string //used to check vip level and execute SQL update
 }
 
 type EventPriceType interface {

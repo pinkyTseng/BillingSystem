@@ -15,8 +15,8 @@ func (p *CommonPattern) ChangeSetting(param EventPatternCreatObj) {
 }
 
 func (p *CommonPattern) CalculatePrice(param *CalculatePriceParam) {
-	coinTotal := param.coinTotal
-	userId := param.userId
+	coinTotal := param.CoinTotal
+	userId := param.UserId
 	coinCost := coinTotal
 	fmt.Printf("user %v should cost %v coins\n", userId, coinCost)
 }
