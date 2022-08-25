@@ -16,6 +16,19 @@ type PointUsePatternFactory struct {
 	// thePattern VipCoinPattern
 }
 
+func (p *PointUsePattern) ChangeSetting(param EventPatternCreatObj) {
+	if param.pointPercentage != "" {
+		pointPercentage := param.pointPercentage
+		ratioArr := strings.Split(pointPercentage, ":")
+		point, _ := strconv.Atoi(ratioArr[0])
+		coin, _ := strconv.Atoi(ratioArr[1])
+
+		p.pointPercentage = pointPercentage //ex: 1:1 point:coin
+		p.pointPartRatio = point
+		p.coinPartRatio = coin
+	}
+}
+
 func (p *PointUsePattern) CalculatePrice(param *CalculatePriceParam) {
 	coinTotal := param.coinTotal
 	userId := param.userId

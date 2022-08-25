@@ -43,11 +43,11 @@ func EventPatternContext(param EventPatternCreatObj) EventPriceType {
 // }
 
 type EventPatternCreatObj struct {
-	factoryType     string
-	eventPriceType  EventPriceType
+	factoryType string
+	// eventPriceType  EventPriceType
 	vipDiscount     map[int]int //ex: VIP1: 95折 [1]95
 	pointPercentage string      //ex: 1:1
-	//others map[string]interface{}
+	others          map[string]interface{}
 }
 type CalculatePriceParam struct {
 	coinTotal  int
@@ -58,6 +58,7 @@ type CalculatePriceParam struct {
 
 type EventPriceType interface {
 	CalculatePrice(param *CalculatePriceParam)
+	ChangeSetting(param EventPatternCreatObj)
 }
 
 func init() {

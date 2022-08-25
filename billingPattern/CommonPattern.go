@@ -10,6 +10,10 @@ type CommonPatternFactory struct {
 type CommonPattern struct {
 }
 
+func (p *CommonPattern) ChangeSetting(param EventPatternCreatObj) {
+
+}
+
 func (p *CommonPattern) CalculatePrice(param *CalculatePriceParam) {
 	coinTotal := param.coinTotal
 	userId := param.userId

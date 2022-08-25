@@ -10,6 +10,18 @@ type VipCoinPatternFactory struct {
 	// thePattern VipCoinPattern
 }
 
+func (p *VipCoinPattern) ChangeSetting(param EventPatternCreatObj) {
+	if param.vipDiscount != nil {
+		vipDiscountMap := make(map[int]int)
+		// vipDiscountMap[0] = 100
+		for k, v := range param.vipDiscount {
+			vipDiscountMap[k] = v
+		}
+		vipDiscountMap[0] = 100
+		p.vipDiscount = vipDiscountMap
+	}
+}
+
 func (p *VipCoinPattern) CalculatePrice(param *CalculatePriceParam) {
 	coinTotal := param.coinTotal
 	userId := param.userId
