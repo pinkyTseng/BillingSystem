@@ -4,8 +4,7 @@ import (
 	"testing"
 )
 
-func TestSomeCase(t *testing.T) {
-
+func TestCommonPattern(t *testing.T) {
 	commonObj := &EventPatternCreatObj{
 		FactoryType: "CommonPattern",
 	}
@@ -14,7 +13,10 @@ func TestSomeCase(t *testing.T) {
 		CoinTotal: 1000,
 		UserId:    "u1",
 	}
+	consume(commonObj, commonCalcObj)
+}
 
+func TestVipCoinPattern(t *testing.T) {
 	vipDiscount1 := make(map[int]int)
 	vipDiscount1[1] = 95
 	vipDiscount1[2] = 90
@@ -29,34 +31,10 @@ func TestSomeCase(t *testing.T) {
 		VipLevel:  2,
 		UserId:    "u2",
 	}
+	consume(vipCoin1Obj, vipCoin1CalcObj)
+}
 
-	vipDiscount2 := make(map[int]int)
-	vipDiscount2[1] = 80
-	vipDiscount2[2] = 75
-	vipDiscount2[3] = 70
-	vipCoin2Obj := &EventPatternCreatObj{
-		FactoryType: "VipCoinPattern",
-		VipDiscount: vipDiscount2,
-	}
-
-	vipCoin2CalcObj := &CalculatePriceParam{
-		CoinTotal: 1000,
-		VipLevel:  1,
-		UserId:    "u3",
-	}
-
-	vipCoin1CalcObj_2 := &CalculatePriceParam{
-		CoinTotal: 1000,
-		VipLevel:  1,
-		UserId:    "u4",
-	}
-
-	vipCoin2CalcObj_2 := &CalculatePriceParam{
-		CoinTotal: 1000,
-		VipLevel:  3,
-		UserId:    "u5",
-	}
-
+func TestPointUsePattern(t *testing.T) {
 	pointUse1Obj := &EventPatternCreatObj{
 		FactoryType:     "PointUsePattern",
 		PointPercentage: "1:1",
@@ -67,43 +45,9 @@ func TestSomeCase(t *testing.T) {
 		PointTotal: 100,
 		UserId:     "u6",
 	}
-
-	pointUse2Obj := &EventPatternCreatObj{
-		FactoryType:     "PointUsePattern",
-		PointPercentage: "1:2",
-	}
-
-	pointUse2CalcObj := &CalculatePriceParam{
-		CoinTotal:  1000,
-		PointTotal: 100,
-		UserId:     "u7",
-	}
-
-	pointUse1CalcObj_2 := &CalculatePriceParam{
-		CoinTotal:  1000,
-		PointTotal: 200,
-		UserId:     "u8",
-	}
-
-	pointUse2CalcObj_2 := &CalculatePriceParam{
-		CoinTotal:  1000,
-		PointTotal: 200,
-		UserId:     "u9",
-	}
-
-	consume(commonObj, commonCalcObj)
-	consume(vipCoin1Obj, vipCoin1CalcObj)
-	consume(vipCoin2Obj, vipCoin2CalcObj)
-	consume(vipCoin1Obj, vipCoin1CalcObj_2)
-	consume(vipCoin2Obj, vipCoin2CalcObj_2)
-
 	consume(pointUse1Obj, pointUse1CalcObj)
-	consume(pointUse2Obj, pointUse2CalcObj)
-	consume(pointUse1Obj, pointUse1CalcObj_2)
-	consume(pointUse2Obj, pointUse2CalcObj_2)
 }
-
-func TestAddedPattern(t *testing.T) {
+func TestReachPointDiscountPattern(t *testing.T) {
 
 	reachPointDiscount := make(map[string]int)
 	reachPointDiscount["pointThreashold"] = 100
