@@ -8,6 +8,14 @@ import (
 
 var EventPriceFactoryMap = make(map[string]EventPriceFactory)
 
+// type PatternTypeEnum int
+// const (
+//     commonPattern PatternTypeEnum = iota
+//     vipCoinPattern
+//     pointUsePattern
+// 	reachPointDiscountPattern
+// )
+
 // public static UserPayService getByUserType(String type){
 // 	return services.get(type);
 // }

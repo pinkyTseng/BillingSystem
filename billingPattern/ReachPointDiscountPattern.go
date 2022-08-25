@@ -46,6 +46,7 @@ func (p *ReachPointDiscountPattern) CalculatePrice(param *CalculatePriceParam) {
 	pointTotal := param.pointTotal
 
 	coinCost := coinTotal - pointTotal*p.coinPartRatio/p.pointPartRatio
+	//in real case, need to pass and check the userId to judge whether the user is a VIP
 	if pointTotal >= p.pointThreashold {
 		coinCost = coinCost * p.pointReachDiscount / 100
 	}
