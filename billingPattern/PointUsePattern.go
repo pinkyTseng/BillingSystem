@@ -28,13 +28,14 @@ func (p *PointUsePattern) ChangeSetting(param EventPatternCreatObj) {
 	}
 }
 
-func (p *PointUsePattern) CalculatePrice(param *CalculatePriceParam) {
+func (p *PointUsePattern) CalculatePrice(param *CalculatePriceParam) int {
 	coinTotal := param.CoinTotal
 	userId := param.UserId
 	pointTotal := param.PointTotal
 
 	coinCost := coinTotal - pointTotal*p.coinPartRatio/p.pointPartRatio
 	fmt.Printf("user %v should cost  %v points & %v coins\n", userId, pointTotal, coinCost)
+	return coinCost
 }
 
 func (f *PointUsePatternFactory) Create(parameters EventPatternCreatObj) (EventPriceType, error) {

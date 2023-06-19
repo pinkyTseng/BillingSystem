@@ -19,7 +19,7 @@ func (p *VipCoinPattern) ChangeSetting(param EventPatternCreatObj) {
 	}
 }
 
-func (p *VipCoinPattern) CalculatePrice(param *CalculatePriceParam) {
+func (p *VipCoinPattern) CalculatePrice(param *CalculatePriceParam) int {
 	coinTotal := param.CoinTotal
 	userId := param.UserId
 	vipLevel := param.VipLevel
@@ -28,6 +28,7 @@ func (p *VipCoinPattern) CalculatePrice(param *CalculatePriceParam) {
 	molecular := p.vipDiscount[vipLevel]
 	coinCost := coinTotal * molecular / 100
 	fmt.Printf("user %v should cost %v coins\n", userId, coinCost)
+	return coinCost
 }
 
 func (f *VipCoinPatternFactory) Create(parameters EventPatternCreatObj) (EventPriceType, error) {

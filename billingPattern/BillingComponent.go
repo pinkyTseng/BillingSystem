@@ -37,7 +37,7 @@ type CalculatePriceParam struct {
 }
 
 type EventPriceType interface {
-	CalculatePrice(param *CalculatePriceParam)
+	CalculatePrice(param *CalculatePriceParam) int //returns cost coin
 	ChangeSetting(param EventPatternCreatObj)
 }
 

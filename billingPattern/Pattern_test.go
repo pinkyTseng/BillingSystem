@@ -13,7 +13,11 @@ func TestCommonPattern(t *testing.T) {
 		CoinTotal: 1000,
 		UserId:    "u1",
 	}
-	consume(commonObj, commonCalcObj)
+	expected := 1000
+	actual := consume(commonObj, commonCalcObj)
+	if expected != actual {
+		t.Errorf("CalculatePrice() = %v, want %v", actual, expected)
+	}
 }
 
 func TestVipCoinPattern(t *testing.T) {
@@ -31,7 +35,12 @@ func TestVipCoinPattern(t *testing.T) {
 		VipLevel:  2,
 		UserId:    "u2",
 	}
-	consume(vipCoin1Obj, vipCoin1CalcObj)
+
+	expected := 900
+	actual := consume(vipCoin1Obj, vipCoin1CalcObj)
+	if expected != actual {
+		t.Errorf("CalculatePrice() = %v, want %v", actual, expected)
+	}
 }
 
 func TestPointUsePattern(t *testing.T) {
@@ -45,7 +54,12 @@ func TestPointUsePattern(t *testing.T) {
 		PointTotal: 100,
 		UserId:     "u6",
 	}
-	consume(pointUse1Obj, pointUse1CalcObj)
+
+	expected := 900
+	actual := consume(pointUse1Obj, pointUse1CalcObj)
+	if expected != actual {
+		t.Errorf("CalculatePrice() = %v, want %v", actual, expected)
+	}
 }
 func TestReachPointDiscountPattern(t *testing.T) {
 
@@ -68,7 +82,11 @@ func TestReachPointDiscountPattern(t *testing.T) {
 		UserId:     "uu1",
 	}
 
-	consume(pointUse1Obj, pointUse1CalcObj)
+	expected := 720
+	actual := consume(pointUse1Obj, pointUse1CalcObj)
+	if expected != actual {
+		t.Errorf("CalculatePrice() = %v, want %v", actual, expected)
+	}
 }
 
 func TestChangeSetting(t *testing.T) {
@@ -89,7 +107,12 @@ func TestChangeSetting(t *testing.T) {
 	}
 
 	priceContext := EventPatternContext(*vipCoin1Obj)
-	priceContext.CalculatePrice(vipCoin1CalcObj)
+
+	expected := 900
+	actual := priceContext.CalculatePrice(vipCoin1CalcObj)
+	if expected != actual {
+		t.Errorf("CalculatePrice() = %v, want %v", actual, expected)
+	}
 
 	vipDiscount2 := make(map[int]int)
 	vipDiscount2[1] = 80
@@ -98,7 +121,12 @@ func TestChangeSetting(t *testing.T) {
 	vipCoin1Obj.VipDiscount = vipDiscount2
 
 	priceContext.ChangeSetting(*vipCoin1Obj)
-	priceContext.CalculatePrice(vipCoin1CalcObj)
+
+	expected = 750
+	actual = priceContext.CalculatePrice(vipCoin1CalcObj)
+	if expected != actual {
+		t.Errorf("CalculatePrice() = %v, want %v", actual, expected)
+	}
 
 }
 
@@ -115,11 +143,20 @@ func TestChangeSettingPointUse(t *testing.T) {
 	}
 
 	priceContext := EventPatternContext(*pointUse1Obj)
-	priceContext.CalculatePrice(pointUse1CalcObj)
+	expected := 900
+	actual := priceContext.CalculatePrice(pointUse1CalcObj)
+	if expected != actual {
+		t.Errorf("CalculatePrice() = %v, want %v", actual, expected)
+	}
 
 	pointUse1Obj.PointPercentage = "1:2"
 	priceContext.ChangeSetting(*pointUse1Obj)
-	priceContext.CalculatePrice(pointUse1CalcObj)
+
+	expected = 800
+	actual = priceContext.CalculatePrice(pointUse1CalcObj)
+	if expected != actual {
+		t.Errorf("CalculatePrice() = %v, want %v", actual, expected)
+	}
 }
 
 func TestChangeSettingReachPointDiscount(t *testing.T) {
@@ -143,7 +180,12 @@ func TestChangeSettingReachPointDiscount(t *testing.T) {
 	}
 
 	priceContext := EventPatternContext(*pointUse1Obj)
-	priceContext.CalculatePrice(pointUse1CalcObj)
+
+	expected := 720
+	actual := priceContext.CalculatePrice(pointUse1CalcObj)
+	if expected != actual {
+		t.Errorf("CalculatePrice() = %v, want %v", actual, expected)
+	}
 
 	reachPointDiscount2 := make(map[string]int)
 	reachPointDiscount2["pointThreashold"] = 50
@@ -155,10 +197,15 @@ func TestChangeSettingReachPointDiscount(t *testing.T) {
 
 	pointUse1Obj.PointPercentage = "1:2"
 	priceContext.ChangeSetting(*pointUse1Obj)
-	priceContext.CalculatePrice(pointUse1CalcObj)
+
+	expected = 480
+	actual = priceContext.CalculatePrice(pointUse1CalcObj)
+	if expected != actual {
+		t.Errorf("CalculatePrice() = %v, want %v", actual, expected)
+	}
 }
 
-func consume(param *EventPatternCreatObj, calcParam *CalculatePriceParam) {
+func consume(param *EventPatternCreatObj, calcParam *CalculatePriceParam) int {
 	priceContext := EventPatternContext(*param)
-	priceContext.CalculatePrice(calcParam)
+	return priceContext.CalculatePrice(calcParam)
 }

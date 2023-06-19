@@ -40,7 +40,7 @@ func (p *ReachPointDiscountPattern) ChangeSetting(param EventPatternCreatObj) {
 	}
 }
 
-func (p *ReachPointDiscountPattern) CalculatePrice(param *CalculatePriceParam) {
+func (p *ReachPointDiscountPattern) CalculatePrice(param *CalculatePriceParam) int {
 	coinTotal := param.CoinTotal
 	userId := param.UserId
 	pointTotal := param.PointTotal
@@ -51,6 +51,7 @@ func (p *ReachPointDiscountPattern) CalculatePrice(param *CalculatePriceParam) {
 		coinCost = coinCost * p.pointReachDiscount / 100
 	}
 	fmt.Printf("user %v should cost  %v points & %v coins\n", userId, pointTotal, coinCost)
+	return coinCost
 }
 
 func (f *ReachPointDiscountPatternFactory) Create(parameters EventPatternCreatObj) (EventPriceType, error) {
